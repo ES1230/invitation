@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>임재준 & 류은선 결혼식에 초대합니다</title>
+    
+    <!-- 카카오톡/SNS 공유 설정 -->
+    <meta property="og:title" content="임재준 & 류은선 결혼식에 초대합니다">
+    <meta property="og:description" content="2027. 07. 10. SAT. PM 12:00">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?w=800">
+    <meta property="og:type" content="website">
+
+    <!-- 폰트: 영문 포인트와 국문 가독성의 조화 -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+KR:wght@300;400;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --accent: #222222;
+            --sub-text: #666666;
+            --point: #b8926a; /* 따뜻한 골드 톤 */
+            --light-bg: #f9f7f4;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #eeeeee;
+            color: var(--accent);
+            word-break: keep-all;
+        }
+
+        .container {
+            width: 100%; max-width: 450px;
+            margin: 0 auto;
+            background-color: var(--bg);
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+        }
+
+        /* 스크롤 애니메이션 효과 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        section { padding: 80px 25px; text-align: center; }
+
+        /* 메인: 매거진 커버 스타일 */
+        .main {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1000') no-repeat center;
+            background-size: cover;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 40px 30px; color: white; text-align: left;
+        }
+        .main-title { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.1; margin-bottom: 15px; font-style: italic; }
+        .main-date { font-size: 0.9rem; letter-spacing: 3px; font-weight: 300; }
+
+        /* 인사말 */
+        .greeting { background-color: var(--light-bg); }
+        .section-eng { font-family: 'Playfair Display', serif; color: var(--point); font-size: 1.3rem; margin-bottom: 10px; display: block; }
+        .section-kor { font-size: 1.1rem; font-weight: 700; margin-bottom: 30px; display: block; letter-spacing: 1px; }
+        .greeting p { font-family: 'Gowun Batang', serif; line-height: 2.4; font-size: 1.05rem; }
+
+        /* 갤러리: 감각적인 9구 그리드 */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+            margin-top: 20px;
+        }
+        .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer; border-radius: 2px; }
+        /* 2번째 사진을 크게 배치하여 포인트 */
+        .gallery-grid img:nth-child(2) { grid-column: span 2; grid-row: span 2; }
+
+        /* 달력 */
+        .calendar-wrap { border: 1px solid #e0e0e0; padding: 30px 15px; border-radius: 2px; background: white; }
+        .cal-month { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { font-size: 0.75rem; color: #999; padding-bottom: 15px; font-weight: normal; }
+        td { padding: 10px 0; font-size: 0.95rem; }
+        .d-day { background: var(--accent); color: white; border-radius: 50%; display: inline-block; width: 30px; height: 30px; line-height: 30px; font-weight: bold; }
+
+        /* 장소 안내 */
+        .location-card { text-align: left; margin-top: 20px; }
+        .venue-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+        .venue-addr { font-size: 0.9rem; color: var(--sub-text); margin-bottom: 20px; }
+        .map-placeholder { width: 100%; height: 220px; background: #eee url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=600') center; background-size: cover; border-radius: 4px; }
+
+        /* 마음 전하실 곳 (어르신용 한글 강조) */
+        .registry { background-color: var(--light-bg); }
+        .acc-box { background: white; border: 1px solid #eee; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+        .acc-header { 
+            width: 100%; padding: 20px; border: none; background: none; font-family: inherit;
+            display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; cursor: pointer;
+        }
+        .acc-content { display: none; padding: 0 20px 20px; text-align: left; font-size: 0.95rem; }
+        .acc-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid #f5f5f5; }
+        .copy-btn { font-size: 0.75rem; padding: 5px 12px; border: 1px solid #ddd; background: #fff; border-radius: 4px; cursor: pointer; }
+
+        /* 화환 사절 문구 */
+        .flower-notice {
+            margin-top: 30px; padding: 25px; border-top: 1px dashed #ccc;
+            font-size: 0.9rem; line-height: 1.8; color: #777;
+        }
+
+        /* 폭죽 버튼 */
+        .btn-celebrate {
+            width: 100%; padding: 20px; background: var(--accent); color: white; border: none;
+            font-family: 'Playfair Display', serif; font-size: 1.1rem; letter-spacing: 2px; cursor: pointer;
+        }
+
+        /* 방명록 */
+        .guest-item { border-bottom: 1px solid #eee; padding: 20px 0; text-align: left; }
+        .guest-name { font-weight: 700; font-size: 0.9rem; color: var(--point); }
+        .guest-msg { font-size: 0.9rem; margin-top: 5px; line-height: 1.6; }
+
+        footer { padding: 60px 20px; font-size: 0.8rem; color: #bbb; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 메인 커버 -->
+    <header class="main">
+        <div class="main-title reveal">Jaejun<br>& Eunseon</div>
+        <div class="main-date reveal">2027. 07. 10. SAT. 12:00 PM</div>
+    </header>
+
+    <!-- 초대 메시지 -->
+    <section class="greeting reveal">
+        <span class="section-eng">Our Marriage</span>
+        <span class="section-kor">소중한 분들을 초대합니다</span>
+        <p>
+            서로의 따뜻함에 이끌려<br>
+            함께 보낸 시간들이 쌓여<br>
+            이제 하나가 되는 약속을 하려 합니다.<br><br>
+            격려와 사랑으로 저희를 키워주신<br>
+            고마운 분들을 모시고자 하오니<br>
+            부디 오셔서 저희의 첫걸음을<br>
+            축복으로 빛내주시면 감사하겠습니다.
+        </p>
+    </section>
+
+    <!-- 갤러리 (9장 예시 사진 채움) -->
+    <section class="reveal">
+        <span class="section-eng">Gallery</span>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=400" alt="예시1">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800" alt="예시2">
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400" alt="예시3">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400" alt="예시4">
+            <img src="https://images.unsplash.com/photo-1522673607200-1648832cee98?w=400" alt="예시5">
+            <img src="https://images.unsplash.com/photo-1475721027187-40017c13639a?w=400" alt="예시6">
+            <img src="https://images.unsplash.com/photo-1549419050-3221376f921d?w=400" alt="예시7">
+            <img src="https://images.unsplash.com/photo-1465495910483-0402495c2565?w=400" alt="예시8">
+            <img src="https://images.unsplash.com/photo-1510076857177-74700760be49?w=400" alt="예시9">
+        </div>
+    </section>
+
+    <!-- 예식일 달력 -->
+    <section class="reveal" style="background-color: #fcfcfc;">
+        <span class="section-eng">The Wedding Day</span>
+        <div class="calendar-wrap">
+            <div class="cal-month">July. 2027</div>
+            <table>
+                <tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>
+                <tr><td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+                <tr><td style="color:#d9534f">4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td><span class="d-day">10</span></td></tr>
+                <tr><td style="color:#d9534f">11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
+                <tr><td style="color:#d9534f">18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr>
+                <tr><td style="color:#d9534f">25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td></tr>
+            </table>
+            <div style="margin-top: 25px; font-weight: bold; font-size: 1rem;">2027년 7월 10일 토요일 낮 12시</div>
+        </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section class="reveal">
+        <span class="section-eng">Location</span>
+        <span class="section-kor">오시는 길</span>
+        <div class="location-card">
+            <div class="venue-name">그랜드 오스티엄 4층 CM홀</div>
+            <div class="venue-addr">서울 강남구 테헤란로 123</div>
+            <div class="map-placeholder"></div>
+            <div style="margin-top: 20px; font-size: 0.9rem; line-height: 1.8;">
+                <strong style="color:var(--point)">지하철</strong><br>2호선 강남역 1번 출구 (도보 5분)<br><br>
+                <strong style="color:var(--point)">주차</strong><br>건물 내 지하 주차장 이용 (2시간 무료)
+            </div>
+        </div>
+    </section>
+
+    <!-- 축하 버튼 -->
+    <section style="padding: 0;">
+        <button class="btn-celebrate" onclick="shootConfetti()">CELEBRATE ✨</button>
+    </section>
+
+    <!-- 마음 전하실 곳 & 화환 사절 -->
+    <section class="registry reveal">
+        <span class="section-eng">Blessing</span>
+        <span class="section-kor">마음 전하실 곳</span>
+        
+        <div class="acc-box">
+            <button class="acc-header" onclick="toggleAcc('acc-groom')">신랑측 계좌번호 <span>▼</span></button>
+            <div id="acc-groom" class="acc-content">
+                <div class="acc-row"><span>신랑 <b>임재준</b><br><small>신한 123-456-789012</small></span> <button class="copy-btn" onclick="copyText('123-456-789012')">복사</button></div>
+                <div class="acc-row"><span>부친 <b>임OO</b><br><small>국민 111-222-333333</small></span> <button class="copy-btn" onclick="copyText('111-222-333333')">복사</button></div>
+                <div class="acc-row"><span>모친 <b>김OO</b><br><small>우리 444-555-666666</small></span> <button class="copy-btn" onclick="copyText('444-555-666666')">복사</button></div>
+            </div>
+        </div>
+
+        <div class="acc-box">
+            <button class="acc-header" onclick="toggleAcc('acc-bride')">신부측 계좌번호 <span>▼</span></button>
+            <div id="acc-bride" class="acc-content">
+                <div class="acc-row"><span>신부 <b>류은선</b><br><small>농협 987-654-321098</small></span> <button class="copy-btn" onclick="copyText('987-654-321098')">복사</button></div>
+                <div class="acc-row"><span>부친 <b>류OO</b><br><small>기업 777-888-999999</small></span> <button class="copy-btn" onclick="copyText('777-888-999999')">복사</button></div>
+                <div class="acc-row"><span>모친 <b>박OO</b><br><small>하나 000-111-222222</small></span> <button class="copy-btn" onclick="copyText('000-111-222222')">복사</button></div>
+            </div>
+        </div>
+
+        <div class="flower-notice">
+            <strong>[ 화환 사절 안내 ]</strong><br>
+            축하해주시는 따뜻한 마음만 감사히 받겠습니다.<br>
+            정중히 화환은 사절하오니 너른 양해 부탁드립니다.
+        </div>
+    </section>
+
+    <!-- 방명록 -->
+    <section class="reveal">
+        <span class="section-eng">Guestbook</span>
+        <div style="margin-top: 20px;">
+            <input type="text" id="name" placeholder="성함" style="width:100%; padding: 15px; margin-bottom: 10px; border:1px solid #eee; border-radius: 4px; box-sizing: border-box; font-family: inherit;">
+            <textarea id="msg" placeholder="축하의 메시지를 남겨주세요" rows="3" style="width:100%; padding: 15px; border:1px solid #eee; border-radius: 4px; box-sizing: border-box; font-family: inherit;"></textarea>
+            <button onclick="addMsg()" style="width: 100%; padding: 15px; background: #222; color:#fff; border: none; margin-top: 10px; cursor: pointer; font-family: inherit;">등록하기</button>
+        </div>
+        <div id="msgList" style="margin-top: 30px;"></div>
+    </section>
+
+    <footer style="text-align: center;">
+        JAEJUN & EUNSEON WEDDING DAY
+    </footer>
+</div>
+
+<script>
+    // 1. 스크롤 애니메이션
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 2. 폭죽
+    function shootConfetti() {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.7 }, colors: ['#222', '#b8926a', '#ffffff'] });
+    }
+
+    // 3. 계좌 토글
+    function toggleAcc(id) {
+        const content = document.getElementById(id);
+        const isVisible = content.style.display === 'block';
+        content.style.display = isVisible ? 'none' : 'block';
+        event.currentTarget.querySelector('span').innerText = isVisible ? '▼' : '▲';
+    }
+
+    // 4. 복사
+    function copyText(t) {
+        navigator.clipboard.writeText(t).then(() => alert('계좌번호가 복사되었습니다.'));
+    }
+
+    // 5. 방명록 시뮬레이션
+    function addMsg() {
+        const n = document.getElementById('name').value;
+        const m = document.getElementById('msg').value;
+        if(!n || !m) return alert('성함과 메시지를 입력해주세요.');
+        const div = document.createElement('div');
+        div.className = 'guest-item';
+        div.innerHTML = `<div class="guest-name">${n}</div><div class="guest-msg">${m}</div>`;
+        document.getElementById('msgList').prepend(div);
+        document.getElementById('name').value = '';
+        document.getElementById('msg').value = '';
+    }
+</script>
+
+</body>
+</html>
